@@ -1,20 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import InputToken from "./components/inputToken/InputToken";
+import Home from "./components/home/Home";
+import Detection from "./components/middle/Detection";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName={'Detection'}>
+        <Stack.Screen name={'Home'} component={Home} options={{title:'Home'}}/>
+        <Stack.Screen
+            name="InputToken"
+            component={InputToken}
+            options={{ title: 'Input Your Token', gestureEnabled:false, headerBackVisible: false}}
+        />
+          <Stack.Screen name={'Detection'} component={Detection} options={{title:'Detection'}}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
