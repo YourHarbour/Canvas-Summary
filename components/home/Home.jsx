@@ -1,17 +1,24 @@
-import {Text, View} from "react-native";
+import {Button, View} from "react-native";
 import {useEffect} from "react";
-import homeStyle from "../../styles/home/homeStyle";
+import HomeStyle from "../../styles/home/HomeStyle";
 
 const Home = ({ navigation }) => {
 
+    useEffect(() => {
+        navigation.addListener('beforeRemove', (e)=> {
+            e.preventDefault();
+        })
+    }, [navigation]);
     return (
-        <View style={homeStyle.container}>
-            <View>
-                <Text>
-                    Detecting Token, Please Wait.
-                </Text>
+        <View style={HomeStyle.container}>
+            <View style={HomeStyle.buttonView}>
+                <Button color="#e64626" onPress={()=>{
+                    navigation.navigate('RecentGrade');
+                }} title={'See Recent Update Grades'}/>
             </View>
-            <Text>Home</Text>
+            <View style={HomeStyle.buttonView}>
+                <Button color="#e64626" title={'See Enrolled Course Grades'}/>
+            </View>
         </View>
     )
 }
